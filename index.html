@@ -1,142 +1,542 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="antialiased dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shivam Kumar | Portfolio</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <meta charSet="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Shivam Kumar — Data & Software Developer</title>
+    <meta name="description" content="Portfolio of Shivam Kumar — B.Tech at IIT (BHU) Varanasi. Developer working on Data & Software problems."/>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        background: '#050505',
+                        foreground: '#ffffff',
+                        muted: '#a1a1aa',
+                        accent: '#22d3ee', // Cyan accent
+                        'accent-2': '#a78bfa', // Violet accent
+                        card: '#09090b',
+                        'card-border': 'rgba(255,255,255,0.1)'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
+                    },
+                    animation: {
+                        'pulse-glow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #050505;
+            color: #ffffff;
+            scroll-behavior: smooth;
+        }
+        
+        .gradient-text {
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-image: linear-gradient(90deg, #22d3ee, #a78bfa);
+        }
+
+        .noise-bg {
+            position: relative;
+        }
+        .noise-bg::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            border-color: rgba(34, 211, 238, 0.3);
+            box-shadow: 0 10px 30px -10px rgba(34, 211, 238, 0.1);
+        }
+
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+            margin: 0 auto;
+            width: 80%;
+        }
+
+        /* Smooth reveal animations for sections */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeIn 0.8s forwards;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </head>
-<body>
-    <nav class="navbar">
-        <div class="nav-brand">Shivam Kumar</div>
-        <ul class="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#achievements">Achievements</a></li>
-        </ul>
+<body class="min-h-screen bg-background text-foreground">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-40 transition-colors duration-300 bg-[#050505]/80 backdrop-blur-md border-b border-white/5">
+        <div class="mx-auto max-w-6xl px-6 py-4 flex items-center justify-between">
+            <a href="#" class="text-xl font-bold gradient-text tracking-tight">SK.</a>
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#about" class="text-sm text-muted hover:text-foreground transition-colors duration-200">About</a>
+                <a href="#skills" class="text-sm text-muted hover:text-foreground transition-colors duration-200">Skills</a>
+                <a href="#experience" class="text-sm text-muted hover:text-foreground transition-colors duration-200">Experience</a>
+                <a href="#projects" class="text-sm text-muted hover:text-foreground transition-colors duration-200">Projects</a>
+                <a href="#achievements" class="text-sm text-muted hover:text-foreground transition-colors duration-200">Achievements</a>
+                <a href="#contact" class="text-sm text-muted hover:text-foreground transition-colors duration-200">Contact</a>
+            </div>
+        </div>
     </nav>
 
-    <header id="home" class="hero">
-        <div class="hero-content">
-            <img src="https://komarev.com/ghpvc/?username=shivamk1075&label=Profile%20Views&color=0077B5&style=flat" alt="Profile Views" class="views-badge" />
+    <main>
+        <!-- Hero Section -->
+        <section class="relative min-h-screen flex items-center justify-center overflow-hidden noise-bg pt-20">
+            <div class="absolute top-1/4 -left-32 w-96 h-96 bg-cyan-500/10 rounded-full blur-[120px] animate-pulse-glow"></div>
+            <div class="absolute bottom-1/4 -right-32 w-96 h-96 bg-violet-500/10 rounded-full blur-[120px] animate-pulse-glow" style="animation-delay: 2s;"></div>
             
-            <h1>Hello <img src="https://raw.githubusercontent.com/MartinHeinz/MartinHeinz/master/wave.gif" width="40px" alt="wave">, I am Shivam![cite: 1, 2]</h1>
-            <p class="subtitle"><b>Likes to work on Data & Software problems</b></p>
-            
-            <div class="social-links">
-                <a href="mailto:shivam.kumar.101075@gmail.com" class="btn"><i class="fas fa-envelope"></i> Email Me</a>
-                <a href="https://linkedin.com/in/shivam-kumar-2a45ba2a1" target="_blank" class="btn"><i class="fab fa-linkedin"></i> LinkedIn</a>
-                <a href="https://github.com/shivamk1075" target="_blank" class="btn"><i class="fab fa-github"></i> GitHub</a>
-                <a href="https://codeforces.com/profile/sciencekonstant" target="_blank" class="btn"><i class="fas fa-code"></i> Codeforces</a>
+            <div class="relative z-10 mx-auto max-w-5xl px-6 text-center reveal">
+                <div class="mb-6">
+                    <span class="inline-block px-4 py-1.5 text-xs font-mono tracking-widest uppercase text-accent border border-accent/20 rounded-full bg-accent/5">IIT (BHU) Varanasi • B.Tech 2027[cite: 1, 2]</span>
+                </div>
+                <h1 class="text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tight leading-[1.05]">
+                    <span class="block text-white mb-2">Hello, I am</span>
+                    <span class="gradient-text">Shivam Kumar[cite: 1, 2]</span>
+                </h1>
+                <p class="mt-6 text-lg sm:text-xl text-muted max-w-2xl mx-auto leading-relaxed">
+                    Likes to work on Data & Software problems
+                </p>
+                <p class="mt-4 text-sm sm:text-base text-muted/70 max-w-xl mx-auto">
+                    Machine Learning • Web Development • Data Structures & Algorithms[cite: 2]
+                </p>
+                
+                <div class="mt-10 flex items-center justify-center gap-5">
+                    <a href="https://github.com/shivamk1075" target="_blank" class="p-3 rounded-full border border-white/10 text-muted hover:text-accent hover:border-accent/30 transition-all duration-300">
+                        <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="20" width="20"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                    </a>
+                    <a href="https://linkedin.com/in/shivam-kumar-2a45ba2a1" target="_blank" class="p-3 rounded-full border border-white/10 text-muted hover:text-accent hover:border-accent/30 transition-all duration-300">
+                        <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="20" width="20"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                    </a>
+                    <a href="mailto:shivam.kumar.101075@gmail.com" class="p-3 rounded-full border border-white/10 text-muted hover:text-accent hover:border-accent/30 transition-all duration-300">
+                        <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="20" width="20"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                    </a>
+                    <a href="#about" class="ml-4 inline-flex items-center gap-2 px-6 py-3 text-sm font-medium rounded-full bg-white text-black hover:bg-white/90 transition-colors duration-300">
+                        Explore
+                        <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="14" width="14"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
+                    </a>
+                </div>
             </div>
-        </div>
-    </header>
+        </section>
 
-    <section id="about" class="section">
-        <h2 class="section-title">Education & Background</h2>
-        <div class="about-content">
-            <div class="card">
-                <h3>B-Tech, Mechanical Engineering[cite: 1, 2]</h3>
-                <h4>IIT (BHU), Varanasi[cite: 1, 2]</h4>
-                <p>CGPA: 9.00 | Expected 2027[cite: 1, 2]</p>
-            </div>
-            <div class="card">
-                <h3>CBSE (XII)[cite: 1, 2]</h3>
-                <h4>Crimson World School Varanasi[cite: 1, 2]</h4>
-                <p>94.80% | 2023[cite: 1, 2]</p>
-            </div>
-        </div>
-    </section>
+        <div class="section-divider"></div>
 
-    <section id="skills" class="section bg-light">
-        <h2 class="section-title">Languages & Tools</h2>
-        <div class="skills-grid">
-            <!-- Languages -->
-            <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" title="Python" alt="Python"/>
-            <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/c/c-original.svg" title="C" alt="C"/>
-            <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/cplusplus/cplusplus-original.svg" title="C++" alt="C++"/>
-            <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" title="JavaScript" alt="JS"/>
-            <img src="https://www.vectorlogo.zone/logos/pytorch/pytorch-icon.svg" title="PyTorch" alt="PyTorch"/>
-            <img src="https://www.vectorlogo.zone/logos/tensorflow/tensorflow-icon.svg" title="TensorFlow" alt="TensorFlow"/>
-            <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg" title="React" alt="React"/>
-            <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg" title="Node.js" alt="Node"/>
-            <!-- Databases & Infrastructure -->
-            <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mongodb/mongodb-original-wordmark.svg" title="MongoDB" alt="MongoDB"/>
-            <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original-wordmark.svg" title="MySQL" alt="MySQL"/>
-            <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original-wordmark.svg" title="Docker" alt="Docker"/>
-            <img src="https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg" title="Git" alt="Git"/>
-        </div>
-    </section>
+        <!-- About Section -->
+        <section id="about" class="py-32 relative reveal">
+            <div class="mx-auto max-w-6xl px-6">
+                <div>
+                    <h2 class="text-sm font-mono tracking-[0.3em] uppercase text-accent mb-3">About Me</h2>
+                    <h3 class="text-3xl sm:text-5xl font-bold mb-8">Building intelligent <span class="gradient-text">solutions</span></h3>
+                </div>
+                
+                <div class="grid lg:grid-cols-5 gap-12 items-start">
+                    <div class="lg:col-span-3 space-y-6">
+                        <p class="text-lg text-muted leading-relaxed">
+                            B-Tech student in Mechanical Engineering at IIT (BHU), Varanasi[cite: 1, 2], building at the intersection of Data Science, Machine Learning, and Software Engineering. I focus on deploying end-to-end pipelines that solve complex, real-world problems.
+                        </p>
+                        
+                        <div class="mt-8 pt-8 border-t border-white/5">
+                            <h4 class="text-sm font-mono tracking-widest uppercase text-muted mb-4">Education</h4>
+                            <div class="space-y-4">
+                                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-sm">
+                                    <div>
+                                        <span class="text-foreground font-medium">B-Tech in Mechanical Engineering</span>
+                                        <span class="text-muted"> — IIT (BHU), Varanasi[cite: 1, 2]</span>
+                                    </div>
+                                    <div class="flex items-center gap-3 text-muted shrink-0">
+                                        <span class="text-accent font-mono">9.00 CGPA[cite: 1, 2]</span>
+                                        <span class="text-muted/50">Expected 2027[cite: 1, 2]</span>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-sm">
+                                    <div>
+                                        <span class="text-foreground font-medium">CBSE (XII)</span>
+                                        <span class="text-muted"> — Crimson World School Varanasi[cite: 1, 2]</span>
+                                    </div>
+                                    <div class="flex items-center gap-3 text-muted shrink-0">
+                                        <span class="text-accent font-mono">94.80%[cite: 1, 2]</span>
+                                        <span class="text-muted/50">2023[cite: 1, 2]</span>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-sm">
+                                    <div>
+                                        <span class="text-foreground font-medium">CBSE (X)</span>
+                                        <span class="text-muted"> — Mount Litera Zee School Varanasi[cite: 1, 2]</span>
+                                    </div>
+                                    <div class="flex items-center gap-3 text-muted shrink-0">
+                                        <span class="text-accent font-mono">92.00%[cite: 1, 2]</span>
+                                        <span class="text-muted/50">2021[cite: 1, 2]</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="lg:col-span-2 grid grid-cols-2 gap-4">
+                        <div class="text-center p-6 rounded-2xl bg-card border border-card-border card-hover">
+                            <div class="text-3xl sm:text-4xl font-bold gradient-text">1603</div>
+                            <div class="mt-2 text-sm text-muted">Max Rating on Codeforces[cite: 1, 2]</div>
+                        </div>
+                        <div class="text-center p-6 rounded-2xl bg-card border border-card-border card-hover">
+                            <div class="text-3xl sm:text-4xl font-bold gradient-text">Top 2%</div>
+                            <div class="mt-2 text-sm text-muted">redBus Hackathon Finalist[cite: 1, 2]</div>
+                        </div>
+                        <div class="text-center p-6 rounded-2xl bg-card border border-card-border card-hover">
+                            <div class="text-3xl sm:text-4xl font-bold gradient-text">0.89</div>
+                            <div class="mt-2 text-sm text-muted">R-squared Model Accuracy[cite: 1]</div>
+                        </div>
+                        <div class="text-center p-6 rounded-2xl bg-card border border-card-border card-hover">
+                            <div class="text-3xl sm:text-4xl font-bold gradient-text">2</div>
+                            <div class="mt-2 text-sm text-muted">Key ML Internships</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <section id="experience" class="section">
-        <h2 class="section-title">Experience</h2>
-        <div class="timeline">
-            <div class="card timeline-card">
-                <h3>Machine Learning Intern[cite: 1, 2]</h3>
-                <h4>PwC & IIT BHU[cite: 1, 2] | May 2026 - July 2026[cite: 1, 2]</h4>
-                <ul>
-                    <li>Architected an end-to-end computer vision pipeline, curating 60K+ rice images (37 classes).[cite: 1, 2]</li>
-                    <li>Fine-tuned ResNet-50, ConvNeXt, & EfficientNet achieving 94.1% accuracy.[cite: 1, 2]</li>
-                    <li>Delivered functional scanner prototype reducing expert time by 40%.[cite: 1, 2]</li>
-                </ul>
-            </div>
-            <div class="card timeline-card">
-                <h3>Data Science Researcher[cite: 1, 2]</h3>
-                <h4>Advanced Manufacturing Lab[cite: 1, 2] | Dec 2025[cite: 1, 2]</h4>
-                <ul>
-                    <li>Spearheaded a material informatics pipeline with 3,400+ image dataset across 7 alloy classes.[cite: 1, 2]</li>
-                    <li>Engineered Bayesian Inverse framework using XGBoost & CatBoost.[cite: 1, 2]</li>
-                </ul>
-            </div>
-        </div>
-    </section>
+        <div class="section-divider"></div>
 
-    <section id="projects" class="section bg-light">
-        <h2 class="section-title">Projects</h2>
-        <div class="projects-grid">
-            <div class="card">
-                <h3>SatTracer: Commercial Viability[cite: 1]</h3>
-                <p>Built a spatial pipeline via PyTorch to extract 50+ multi-radius synergy features. Engineered a Stacked Ensemble achieving 0.89 R-squared.[cite: 1]</p>
-                <div class="tech-stack"><span>PyTorch</span><span>XGBoost</span><span>Modal</span></div>
+        <!-- Skills Section -->
+        <section id="skills" class="py-32 relative reveal">
+            <div class="mx-auto max-w-6xl px-6">
+                <div>
+                    <h2 class="text-sm font-mono tracking-[0.3em] uppercase text-accent mb-3">Tech Stack</h2>
+                    <h3 class="text-3xl sm:text-5xl font-bold mb-12">Tools of the <span class="gradient-text">trade</span></h3>
+                </div>
+                
+                <div class="grid sm:grid-cols-2 gap-6">
+                    <div class="rounded-2xl bg-card border border-card-border p-6 card-hover">
+                        <h4 class="text-sm font-mono tracking-widest uppercase text-muted mb-4">Languages</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="inline-block px-3 py-1.5 text-sm rounded-lg bg-gradient-to-b border from-cyan-400/20 to-cyan-400/5 border-cyan-400/20 text-cyan-300">Python[cite: 1, 2]</span>
+                            <span class="inline-block px-3 py-1.5 text-sm rounded-lg bg-gradient-to-b border from-cyan-400/20 to-cyan-400/5 border-cyan-400/20 text-cyan-300">C/C++[cite: 1, 2]</span>
+                            <span class="inline-block px-3 py-1.5 text-sm rounded-lg bg-gradient-to-b border from-cyan-400/20 to-cyan-400/5 border-cyan-400/20 text-cyan-300">SQL[cite: 1, 2]</span>
+                            <span class="inline-block px-3 py-1.5 text-sm rounded-lg bg-gradient-to-b border from-cyan-400/20 to-cyan-400/5 border-cyan-400/20 text-cyan-300">JavaScript[cite: 2]</span>
+                            <span class="inline-block px-3 py-1.5 text-sm rounded-lg bg-gradient-to-b border from-cyan-400/20 to-cyan-400/5 border-cyan-400/20 text-cyan-300">HTML/CSS[cite: 2]</span>
+                        </div>
+                    </div>
+                    
+                    <div class="rounded-2xl bg-card border border-card-border p-6 card-hover">
+                        <h4 class="text-sm font-mono tracking-widest uppercase text-muted mb-4">ML & AI</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="inline-block px-3 py-1.5 text-sm rounded-lg bg-gradient-to-b border from-violet-400/20 to-violet-400/5 border-violet-400/20 text-violet-300">TensorFlow[cite: 1, 2]</span>
+                            <span class="inline-block px-3 py-1.5 text-sm rounded-lg bg-gradient-to-b border from-violet-400/20 to-violet-400/5 border-violet-400/20 text-violet-300">PyTorch[cite: 1, 2]</span>
+                            <span class="inline-block px-3 py-1.5 text-sm rounded-lg bg-gradient-to-b border from-violet-400/20 to-violet-400/5 border-violet-400/20 text-violet-300">Scikit-learn[cite: 1]</span>
+                            <span class="inline-block px-3 py-1.5 text-sm rounded-lg bg-gradient-to-b border from-violet-400/20 to-violet-400/5 border-violet-400/20 text-violet-300">OpenCV[cite: 1]</span>
+                            <span class="inline-block px-3 py-1.5 text-sm rounded-lg bg-gradient-to-b border from-violet-400/20 to-violet-400/5 border-violet-400/20 text-violet-300">Pandas/Numpy[cite: 1, 2]</span>
+                        </div>
+                    </div>
+                    
+                    <div class="rounded-2xl bg-card border border-card-border p-6 card-hover">
+                        <h4 class="text-sm font-mono tracking-widest uppercase text-muted mb-4">Tools & Platforms</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="inline-block px-3 py-1.5 text-sm rounded-lg bg-gradient-to-b border from-amber-400/20 to-amber-400/5 border-amber-400/20 text-amber-300">Node.js[cite: 2]</span>
+                            <span class="inline-block px-3 py-1.5 text-sm rounded-lg bg-gradient-to-b border from-amber-400/20 to-amber-400/5 border-amber-400/20 text-amber-300">MongoDB[cite: 2]</span>
+                            <span class="inline-block px-3 py-1.5 text-sm rounded-lg bg-gradient-to-b border from-amber-400/20 to-amber-400/5 border-amber-400/20 text-amber-300">MySQL[cite: 2]</span>
+                            <span class="inline-block px-3 py-1.5 text-sm rounded-lg bg-gradient-to-b border from-amber-400/20 to-amber-400/5 border-amber-400/20 text-amber-300">FastAPI[cite: 1, 2]</span>
+                            <span class="inline-block px-3 py-1.5 text-sm rounded-lg bg-gradient-to-b border from-amber-400/20 to-amber-400/5 border-amber-400/20 text-amber-300">Streamlit[cite: 1]</span>
+                            <span class="inline-block px-3 py-1.5 text-sm rounded-lg bg-gradient-to-b border from-amber-400/20 to-amber-400/5 border-amber-400/20 text-amber-300">Git/GitHub[cite: 1, 2]</span>
+                            <span class="inline-block px-3 py-1.5 text-sm rounded-lg bg-gradient-to-b border from-amber-400/20 to-amber-400/5 border-amber-400/20 text-amber-300">Linux[cite: 2]</span>
+                        </div>
+                    </div>
+                    
+                    <div class="rounded-2xl bg-card border border-card-border p-6 card-hover">
+                        <h4 class="text-sm font-mono tracking-widest uppercase text-muted mb-4">Domains</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="inline-block px-3 py-1.5 text-sm rounded-lg bg-gradient-to-b border from-emerald-400/20 to-emerald-400/5 border-emerald-400/20 text-emerald-300">Data Structures & Algorithms[cite: 1, 2]</span>
+                            <span class="inline-block px-3 py-1.5 text-sm rounded-lg bg-gradient-to-b border from-emerald-400/20 to-emerald-400/5 border-emerald-400/20 text-emerald-300">Machine Learning[cite: 1, 2]</span>
+                            <span class="inline-block px-3 py-1.5 text-sm rounded-lg bg-gradient-to-b border from-emerald-400/20 to-emerald-400/5 border-emerald-400/20 text-emerald-300">Computer Vision[cite: 1]</span>
+                            <span class="inline-block px-3 py-1.5 text-sm rounded-lg bg-gradient-to-b border from-emerald-400/20 to-emerald-400/5 border-emerald-400/20 text-emerald-300">NLP & LLMs (RAG)[cite: 1]</span>
+                            <span class="inline-block px-3 py-1.5 text-sm rounded-lg bg-gradient-to-b border from-emerald-400/20 to-emerald-400/5 border-emerald-400/20 text-emerald-300">Web Development[cite: 2]</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="card">
-                <h3>CommentScore: NLP Streaming Engine[cite: 1, 2]</h3>
-                <p>Designed a Transformer NLP pipeline evaluating BERT, ROBERTa, fine-tuning on 250K+ records to achieve 0.88 F1-score.[cite: 1, 2]</p>
-                <div class="tech-stack"><span>Transformers</span><span>Python</span><span>Streamlit</span></div>
-            </div>
-            <div class="card">
-                <h3>CampusFix: Issue Tracking Portal[cite: 2]</h3>
-                <p>Developed a full-stack MERN website to digitize campus maintenance tracking with secure user authentication and Cloudinary integration.[cite: 2]</p>
-                <div class="tech-stack"><span>MongoDB</span><span>Express</span><span>React</span><span>Node.js</span></div>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="achievements" class="section">
-        <h2 class="section-title">Honours & Achievements</h2>
-        <div class="card">
-            <ul class="achievement-list">
-                <li><strong>Competitive Programming:</strong> Held Codeforces Expert (max rating 1603) with 900+ problems solved.[cite: 1, 2]</li>
-                <li><strong>Codeforces Rank:</strong> Secured global rank 1193 out of 24,000+ competitors in Edu Round 193.[cite: 1, 2]</li>
-                <li><strong>Hackathons:</strong> AWS & Zelestra ML Ascend Finalist (Top 0.7%), redBus Data Decode Finalist (Top 2%).[cite: 1, 2]</li>
-                <li><strong>Prime Minister's Scholarship:</strong> Top 1,000 scholar from 1 lakh applicants for a 4-year merit award.[cite: 1, 2]</li>
-                <li><strong>Position of Responsibility:</strong> Public Relations Manager at Technex'26, hosted Ferrari CEO and secured 45+ exhibitors.[cite: 1, 2]</li>
-            </ul>
-        </div>
-    </section>
+        <div class="section-divider"></div>
 
-    <footer>
-        <div class="streak-container">
-            <img src="https://streak-stats.demolab.com/?user=shivamk1075&theme=transparent&hide_border=true&border_radius=5" alt="GitHub Streak" />
+        <!-- Experience Section -->
+        <section id="experience" class="py-32 relative reveal">
+            <div class="mx-auto max-w-4xl px-6">
+                <div>
+                    <h2 class="text-sm font-mono tracking-[0.3em] uppercase text-accent mb-3">Experience</h2>
+                    <h3 class="text-3xl sm:text-5xl font-bold mb-12">Where I've <span class="gradient-text">worked</span></h3>
+                </div>
+                
+                <div class="relative">
+                    <div class="relative pl-8 pb-12 last:pb-0 group">
+                        <div class="absolute left-0 top-1.5 w-3 h-3 rounded-full bg-accent/30 border-2 border-accent group-hover:bg-accent transition-colors duration-300"></div>
+                        <div class="absolute left-[5px] top-5 w-[2px] h-full bg-gradient-to-b from-accent/20 to-transparent"></div>
+                        
+                        <div class="rounded-2xl bg-card border border-card-border p-6 card-hover">
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+                                <div>
+                                    <h4 class="text-lg font-semibold text-foreground">PwC & IIT BHU[cite: 1, 2]</h4>
+                                    <p class="text-sm text-accent">Machine Learning Intern[cite: 1, 2]</p>
+                                </div>
+                                <div class="flex items-center gap-3 text-xs text-muted font-mono shrink-0">
+                                    <span>May 2026 — Jul 2026[cite: 1, 2]</span>
+                                </div>
+                            </div>
+                            <ul class="space-y-2 mt-3">
+                                <li class="flex gap-3 text-sm text-muted leading-relaxed">
+                                    <span class="text-accent mt-1.5 shrink-0">▸</span>
+                                    <span>Architected an end-to-end computer vision pipeline, curating 60K+ rice images (37 classes) from raw optical scans; engineered OpenCV segmentation techniques and PCA alignment to resolve overlapping grains.[cite: 1, 2]</span>
+                                </li>
+                                <li class="flex gap-3 text-sm text-muted leading-relaxed">
+                                    <span class="text-accent mt-1.5 shrink-0">▸</span>
+                                    <span>Fine-tuned ResNet-50, ConvNeXt, & EfficientNet across distributed servers, achieving 94.1% accuracy & 0.93 F1.[cite: 1, 2]</span>
+                                </li>
+                                <li class="flex gap-3 text-sm text-muted leading-relaxed">
+                                    <span class="text-accent mt-1.5 shrink-0">▸</span>
+                                    <span>Delivered a functional scanner prototype to LT Foods QA, processing 6 min/sample and reducing expert time by 40%.[cite: 1, 2]</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="relative pl-8 pb-12 last:pb-0 group">
+                        <div class="absolute left-0 top-1.5 w-3 h-3 rounded-full bg-accent/30 border-2 border-accent group-hover:bg-accent transition-colors duration-300"></div>
+                        
+                        <div class="rounded-2xl bg-card border border-card-border p-6 card-hover">
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+                                <div>
+                                    <h4 class="text-lg font-semibold text-foreground">Advanced Manufacturing Lab[cite: 1, 2]</h4>
+                                    <p class="text-sm text-accent">Data Science Researcher[cite: 1, 2]</p>
+                                </div>
+                                <div class="flex items-center gap-3 text-xs text-muted font-mono shrink-0">
+                                    <span>Dec 2025[cite: 1, 2]</span>
+                                </div>
+                            </div>
+                            <ul class="space-y-2 mt-3">
+                                <li class="flex gap-3 text-sm text-muted leading-relaxed">
+                                    <span class="text-accent mt-1.5 shrink-0">▸</span>
+                                    <span>Spearheaded a material informatics pipeline, compiling a proprietary 3,400+ image dataset across 7 alloy classes; designed spatial statistical algorithms (convolution, cluster analysis) to identify micro-structural anomalies.[cite: 1, 2]</span>
+                                </li>
+                                <li class="flex gap-3 text-sm text-muted leading-relaxed">
+                                    <span class="text-accent mt-1.5 shrink-0">▸</span>
+                                    <span>Engineered Bayesian Inverse framework using an ensemble of XGBoost & CatBoost to quantify anomaly severity.[cite: 1, 2]</span>
+                                </li>
+                                <li class="flex gap-3 text-sm text-muted leading-relaxed">
+                                    <span class="text-accent mt-1.5 shrink-0">▸</span>
+                                    <span>Automated tuning to achieve a 0.92 F1-score, deploying via Streamlit to cut manual inspection by 30%.[cite: 1, 2]</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Projects Section -->
+        <section id="projects" class="py-32 relative reveal">
+            <div class="mx-auto max-w-6xl px-6">
+                <div>
+                    <h2 class="text-sm font-mono tracking-[0.3em] uppercase text-accent mb-3">Projects</h2>
+                    <h3 class="text-3xl sm:text-5xl font-bold mb-12">Things I've <span class="gradient-text">built</span></h3>
+                </div>
+                
+                <div class="grid sm:grid-cols-2 gap-6">
+                    <!-- Project 1 -->
+                    <div class="group rounded-2xl bg-card border border-card-border p-8 card-hover relative overflow-hidden sm:col-span-2 lg:col-span-1">
+                        <div class="absolute top-4 right-4 px-2 py-0.5 text-[10px] font-mono tracking-wider uppercase text-accent border border-accent/20 rounded-full bg-accent/5">Featured</div>
+                        <h4 class="text-xl font-semibold text-foreground mb-3 group-hover:text-accent transition-colors duration-300">SatTracer: Commercial Viability[cite: 1]</h4>
+                        <p class="text-sm text-muted leading-relaxed mb-5">
+                            Built a spatial pipeline via PyTorch to extract 50+ multi-radius synergy features across 2.5M+ Overture Maps commercial zones. Engineered a Stacked Ensemble (XGBoost, LightGBM, CatBoost) achieving 0.89 R-squared and 2.6% MAE. Deployed a Modal backend for a Streamlit app to score 1.5K+ categories instantly.[cite: 1]
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="px-2.5 py-1 text-xs font-mono rounded-md bg-white/5 text-muted border border-white/5">PyTorch[cite: 1]</span>
+                            <span class="px-2.5 py-1 text-xs font-mono rounded-md bg-white/5 text-muted border border-white/5">XGBoost[cite: 1]</span>
+                            <span class="px-2.5 py-1 text-xs font-mono rounded-md bg-white/5 text-muted border border-white/5">Streamlit[cite: 1]</span>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="group rounded-2xl bg-card border border-card-border p-8 card-hover relative overflow-hidden sm:col-span-2 lg:col-span-1">
+                        <h4 class="text-xl font-semibold text-foreground mb-3 group-hover:text-accent transition-colors duration-300">CommentScore: NLP Streaming Engine[cite: 1, 2]</h4>
+                        <p class="text-sm text-muted leading-relaxed mb-5">
+                            Designed a Transformer NLP pipeline evaluating BERT, ROBERTa, and DistilBERT, fine-tuning on 250K+ records to achieve a 0.88 F1-score. Integrated a Modal API backend processing streams from GitHub, Hacker News, & YouTube. Launched on Streamlit to extract live sentiment.[cite: 1, 2]
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="px-2.5 py-1 text-xs font-mono rounded-md bg-white/5 text-muted border border-white/5">Transformers[cite: 1, 2]</span>
+                            <span class="px-2.5 py-1 text-xs font-mono rounded-md bg-white/5 text-muted border border-white/5">BERT/RoBERTa[cite: 1, 2]</span>
+                            <span class="px-2.5 py-1 text-xs font-mono rounded-md bg-white/5 text-muted border border-white/5">Modal API[cite: 1, 2]</span>
+                        </div>
+                    </div>
+
+                    <!-- Project 3 -->
+                    <div class="group rounded-2xl bg-card border border-card-border p-8 card-hover relative overflow-hidden sm:col-span-2 lg:col-span-1">
+                        <h4 class="text-xl font-semibold text-foreground mb-3 group-hover:text-accent transition-colors duration-300">CampusFix: Issue Tracking Portal[cite: 2]</h4>
+                        <p class="text-sm text-muted leading-relaxed mb-5">
+                            Developed a full-stack MERN website to digitize campus maintenance tracking, featuring secure user authentication, an issue reporting dashboard, and a centralized feed for discovering and filtering campus complaints. Integrated Cloudinary for image evidence uploads.[cite: 2]
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="px-2.5 py-1 text-xs font-mono rounded-md bg-white/5 text-muted border border-white/5">MongoDB[cite: 2]</span>
+                            <span class="px-2.5 py-1 text-xs font-mono rounded-md bg-white/5 text-muted border border-white/5">Express/React/Node[cite: 2]</span>
+                            <span class="px-2.5 py-1 text-xs font-mono rounded-md bg-white/5 text-muted border border-white/5">Cloudinary API[cite: 2]</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Achievements Section -->
+        <section id="achievements" class="py-32 relative reveal">
+            <div class="mx-auto max-w-6xl px-6">
+                <div>
+                    <h2 class="text-sm font-mono tracking-[0.3em] uppercase text-accent mb-3">More</h2>
+                    <h3 class="text-3xl sm:text-5xl font-bold mb-12">Beyond the <span class="gradient-text">code</span></h3>
+                </div>
+                
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <!-- Leadership -->
+                    <div class="rounded-2xl bg-card border border-card-border p-8 card-hover">
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="p-2 rounded-lg bg-amber-400/10">
+                                <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="text-amber-400" height="18" width="18"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                            </div>
+                            <h4 class="text-lg font-semibold">Leadership & Responsibility</h4>
+                        </div>
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex items-center justify-between gap-3">
+                                    <div class="text-foreground font-medium">Public Relations Manager | Technex'26[cite: 1, 2]</div>
+                                    <span class="text-xs text-muted font-mono shrink-0">Oct 2025 — Mar 2026[cite: 1, 2]</span>
+                                </div>
+                                <div class="text-sm text-muted mt-1">Spearheaded 6-month campaign to secure 45+ exhibitors including Indian Army, ISRO, DRDO. Hosted Ferrari CEO B. Vigna and directed operations for 50+ VIPs.[cite: 1, 2]</div>
+                            </div>
+                            <div>
+                                <div class="flex items-center justify-between gap-3">
+                                    <div class="text-foreground font-medium">CSI Club Workshop Mentor[cite: 2]</div>
+                                </div>
+                                <div class="text-sm text-muted mt-1">Mentored 50+ juniors for development & ML track.[cite: 2]</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Honours -->
+                    <div class="rounded-2xl bg-card border border-card-border p-8 card-hover">
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="p-2 rounded-lg bg-emerald-400/10">
+                                <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-400" height="18" width="18"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
+                            </div>
+                            <h4 class="text-lg font-semibold">Honours & Achievements</h4>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="flex items-start gap-3 text-sm">
+                                <span class="text-emerald-400 mt-0.5 shrink-0">✓</span>
+                                <span class="text-muted"><strong>Codeforces Expert:</strong> Max rating 1603, 900+ problems solved. Global rank 1193 in Edu Round 193.[cite: 1, 2]</span>
+                            </div>
+                            <div class="flex items-start gap-3 text-sm">
+                                <span class="text-emerald-400 mt-0.5 shrink-0">✓</span>
+                                <span class="text-muted"><strong>Hackathon Finalist:</strong> AWS & Zelestra ML Ascend (Top 0.7%), redBus Data Decode Hackathon 2025 (Top 2%).[cite: 1, 2]</span>
+                            </div>
+                            <div class="flex items-start gap-3 text-sm">
+                                <span class="text-emerald-400 mt-0.5 shrink-0">✓</span>
+                                <span class="text-muted"><strong>Prime Minister's Scholarship:</strong> Secured as a top 1,000 scholar from 1 lakh applicants for a 4-year merit award.[cite: 1, 2]</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-32 relative reveal">
+            <div class="absolute inset-0 bg-gradient-to-t from-accent/[0.03] to-transparent pointer-events-none"></div>
+            <div class="mx-auto max-w-4xl px-6 relative z-10">
+                <div class="text-center">
+                    <h2 class="text-sm font-mono tracking-[0.3em] uppercase text-accent mb-3">Contact</h2>
+                    <h3 class="text-3xl sm:text-5xl font-bold mb-6">Let's <span class="gradient-text">connect</span></h3>
+                    <p class="text-muted max-w-lg mx-auto mb-12">Interested in collaborating on data tools, software engineering, or just want to say hi? Let's talk.</p>
+                </div>
+                
+                <div class="grid sm:grid-cols-2 gap-6 mb-12">
+                    <a href="mailto:shivam.kumar.101075@gmail.com" class="group flex items-center gap-4 p-6 rounded-2xl bg-card border border-card-border card-hover">
+                        <div class="p-3 rounded-xl bg-accent/10 group-hover:bg-accent/20 transition-colors">
+                            <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="text-accent" height="20" width="20"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                        </div>
+                        <div>
+                            <div class="text-sm text-muted">Email</div>
+                            <div class="text-foreground font-medium text-sm break-all">shivam.kumar.101075@gmail.com</div>
+                        </div>
+                    </a>
+                    
+                    <a href="https://linkedin.com/in/shivam-kumar-2a45ba2a1" target="_blank" class="group flex items-center gap-4 p-6 rounded-2xl bg-card border border-card-border card-hover">
+                        <div class="p-3 rounded-xl bg-blue-400/10 group-hover:bg-blue-400/20 transition-colors">
+                            <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="text-blue-400" height="20" width="20"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                        </div>
+                        <div>
+                            <div class="text-sm text-muted">LinkedIn</div>
+                            <div class="text-foreground font-medium">Shivam Kumar</div>
+                        </div>
+                    </a>
+                    
+                    <a href="https://github.com/shivamk1075" target="_blank" class="group flex items-center gap-4 p-6 rounded-2xl bg-card border border-card-border card-hover">
+                        <div class="p-3 rounded-xl bg-white/10 group-hover:bg-white/15 transition-colors">
+                            <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="text-foreground" height="20" width="20"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                        </div>
+                        <div>
+                            <div class="text-sm text-muted">GitHub</div>
+                            <div class="text-foreground font-medium">@shivamk1075</div>
+                        </div>
+                    </a>
+                    
+                    <div class="flex items-center gap-4 p-6 rounded-2xl bg-card border border-card-border">
+                        <div class="p-3 rounded-xl bg-emerald-400/10">
+                            <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-400" height="20" width="20"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                        </div>
+                        <div>
+                            <div class="text-sm text-muted">Location</div>
+                            <div class="text-foreground font-medium">Varanasi, India[cite: 1, 2]</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="border-t border-white/5 py-8 mt-12 bg-black/50">
+        <div class="mx-auto max-w-6xl px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="text-sm text-muted">© 2026 Shivam Kumar. Designed with Tailwind.</div>
+            <div class="flex items-center gap-4">
+                <a href="https://github.com/shivamk1075" target="_blank" class="text-muted hover:text-foreground transition-colors"><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="16" width="16"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a>
+                <a href="https://linkedin.com/in/shivam-kumar-2a45ba2a1" target="_blank" class="text-muted hover:text-foreground transition-colors"><svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" height="16" width="16"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
+            </div>
         </div>
-        <p><i>Let's connect and build something great.</i></p>
-        <p>&copy; 2026 Shivam Kumar. All Rights Reserved.</p>
     </footer>
-
-    <script src="script.js"></script>
 </body>
 </html>
